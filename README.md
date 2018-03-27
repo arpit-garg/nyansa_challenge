@@ -11,7 +11,7 @@ You’re given an input file. Each line consists of a timestamp (unix epoch in s
 
 
 input.txt
-
+```
 1407564301|www.nba.com
 1407478021|www.facebook.com
 1407478022|www.facebook.com
@@ -24,10 +24,10 @@ input.txt
 1407564301|sports.yahoo.com
 1407478022|www.google.com
 1407648022|www.twitter.com
-
+```
 
 Output
-
+```
 08/08/2014 GMT
 www.facebook.com 2
 www.google.com 2
@@ -38,6 +38,6 @@ sports.yahoo.com 2
 www.cnn.com 1
 08/10/2014 GMT
 www.twitter.com 1
-
+```
 
 Correctness, efficiency (speed and memory) and code cleanliness will be evaluated. Please provide a complexity analysis in Big-O notation for your program along with your source. 

@@ -1,0 +1,33 @@
+Producer Consumer Problem
+
+Assume that the queue is empty but the consumer process is not releasing the
+lock so no other consumer can access the lock. This will create a deadlock and
+no producer or consumer will be able to acquire the lock. Producer won’t be
+able to create an item and consumer won’t be able to consume. Due to deadlock,
+waiting queue will increase and there will be memory management problem and hence
+the system will crash.
+
+This can be fixed by including a lock release statement inside the if block
+when the queue is empty. That ways, the lock will be released and other
+consumers and producers will be able to access the lock.
+
+Producer
+while (true) {
+       item = generate_item()
+       mutex.lock()
+       fifo_queue.push(item)
+       mutex.unlock()
+       condition.signal()
+}
+
+Consumers
+while(true) {
+       mutex.lock()
+       if (fifo_queue.empty()) {
+            mutex.unlock()          # Fix
+            condition.wait(mutex)
+       }
+       item = fifo_queue.remove()
+       mutex.unlock()
+       process_item(item)
+}

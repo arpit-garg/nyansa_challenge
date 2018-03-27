@@ -3,6 +3,14 @@ from time import localtime, strftime
 
 from operator import itemgetter
 
+'''
+The complexity of the code wil be:
+O(n) for reading and creating the mapping of dates and urls where n is length of file.
+O(mlogm * klogk) where m is len of unique dates sorted and k is len of sorted url hits.
+Since we are given that unique dates and hits are pretty low and unique urls fit into memory,
+this code wouldn't take too long.
+It uses dictionary(hashmap) for O(1) lookup.
+'''
 
 def in_dict(_dict, key):
     """

@@ -11,7 +11,7 @@ You’re given an input file. Each line consists of a timestamp (unix epoch in s
 
 
 input.txt
-
+```
 1407564301|www.nba.com
 1407478021|www.facebook.com
 1407478022|www.facebook.com
@@ -24,7 +24,7 @@ input.txt
 1407564301|sports.yahoo.com
 1407478022|www.google.com
 1407648022|www.twitter.com
-
+```
 
 Output
 

@@ -12,6 +12,7 @@ this code wouldn't take too long.
 It uses dictionary(hashmap) for O(1) lookup.
 '''
 
+
 def in_dict(_dict, key):
     """
     Returns True if key is present in dictionary else return False if not

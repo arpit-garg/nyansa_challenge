@@ -1,15 +1,14 @@
 Producer Consumer Problem
 
-Assume that the queue is empty but the consumer process is not releasing the
-lock so no other consumer can access the lock. This will create a deadlock and
-no producer or consumer will be able to acquire the lock. Producer won’t be
-able to create an item and consumer won’t be able to consume. Due to deadlock,
-waiting queue will increase and there will be memory management problem and hence
-the system will crash.
+We need to use 'while' instead of 'if' while waiting on the consumer in blocked state.
+Because calling signal only puts the waiting thread on run queue, it does not run it immediately.
+If some other consumer woke up before this consumer thread T, then that will process the item and
+queue will be empty again and now when T wakes up, removing item from queue will fail and will
+throw an exception(InterruptedException).
 
-This can be fixed by including a lock release statement inside the if block
-when the queue is empty. That ways, the lock will be released and other
-consumers and producers will be able to access the lock.
+The current thread T might be arbitrarily chosen to wake up or it gets interrupted or the time specified elapses and the thread wakes up.
+A producer may signal the notify or notifyAll() method instead to just one and then the code will break.
+It should always check in a loop for empty queue whenever a consumer wakes up.
 
 Producer
 while (true) {
@@ -23,8 +22,7 @@ while (true) {
 Consumers
 while(true) {
        mutex.lock()
-       if (fifo_queue.empty()) {
-            mutex.unlock()          # Fix
+       while (fifo_queue.empty()) {  # Fix
             condition.wait(mutex)
        }
        item = fifo_queue.remove()

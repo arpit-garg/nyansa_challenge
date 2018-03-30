@@ -36,7 +36,7 @@ def create_url_map(input_file):
     with open(input_file) as _file:
         for line in _file:
             line = line.split('|')
-            gmt = strftime('%Y-%m-%d', localtime(int(line[0])))
+            gmt = strftime('%Y/%m/%d', localtime(int(line[0])))
             # gmt = line[0][:10]
             if not in_dict(time_url_map, gmt):
                 time_url_map[gmt] = {}
@@ -58,7 +58,7 @@ def print_sorted_mapping(time_url_map):
 
     # with open('sorted_output.txt','w') as sortf:
     for i in sorted(time_url_map.items(), key=itemgetter(0)):
-        new_date = strftime('%m/%d/%Y', strptime(i[0], '%Y-%m-%d'))
+        new_date = strftime('%m/%d/%Y', strptime(i[0], '%Y/%m/%d'))
         print(new_date + ' GMT')
         # sortf.write(str(new_date) + ' GMT' + '\n')
         sorted_urls_count = sorted(i[1].items(), key=itemgetter(1), reverse=True)

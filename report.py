@@ -5,10 +5,11 @@ from operator import itemgetter
 
 '''
 The complexity of the code wil be:
-O(n+ mlogm * klogk) where n is number of lines in input file, m is number of
+O(n+ mlogm + mklogk) where n is number of lines in input file, m is number of
 unique dates sorted and k is len of sorted url hits.
 Since we are given that unique dates and hits are pretty low (n >> k),
 essentially the complexity should be O(n) as it will take most of the time.
+mlogm and klogk will be small values in comparison to n
 '''
 
 

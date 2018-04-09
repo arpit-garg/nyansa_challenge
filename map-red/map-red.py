@@ -1,21 +1,39 @@
 from sys import argv
 from operator import itemgetter
 
+'''
+Key-Value Transformations
+
+To solve this problem, we will use multiple pass map reduce jobs.
+
+The map reduce jobs will be chained/cascaded together to get the final answer.
+Initially we will have our data as list of data points read from an input file.
+
+The 1st mapper will get the id as key and score and device type as values.
+It will return the count of each id as 1.
+
+The 1st reducer will get these key value pairs with 1 count and reduce them
+for each unique id type(key) and avg the score(values).
+
+The 2nd mapper will get these transformed values and then for each device(key)
+type it will assign it as poor or not poor(values).
+
+The 2nd reducer will reduce the data to for each device type(key) to find
+the poor-ratio(values).
+'''
 
 def map_first_pass(data_points):
     """
-
-    :param data_points:
-    :return:
+    :param data_points: list of input data
+    :return: list of key value pairs with 1 count
     """
     return data_points[0], data_points[1], data_points[2], 1
 
 
 def reduce_first_pass(dev_cnt_list):
     """
-
-    :param dev_cnt_list:
-    :rtype : object
+    :param dev_cnt_list: list of all values for each unique key
+    :rtype : list of device type and average value for each key
     """
     _sum = 0
     for i in dev_cnt_list:
@@ -25,18 +43,16 @@ def reduce_first_pass(dev_cnt_list):
 
 def map_second_pass(dev_scores):
     """
-
-    :param dev_scores:
-    :return:
+    :param dev_scores: list of key value pais of device type and avg scores
+    :return: list of device type and poor/not poor mapping
     """
     return dev_scores[0], 'Poor' if dev_scores[1] <= 50 else 'Not Poor'
 
 
 def reduce_second_pass(poor_vals):
     """
-
-    :param poor_vals:
-    :return:
+    :param poor_vals: list of poor value for each device
+    :return: float val poor-ratio for each device
     """
     return float(poor_vals.count('Poor')) / len(poor_vals)
 

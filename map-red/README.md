@@ -15,6 +15,8 @@ X.score is an application performance score between 0 and 100 (e.g., Facebook ap
 
 Example input:
 
+```
+
 X1 = {"1.1.1.1", "android", 20}
 
 X2 = {"1.1.1.1", "android", 100}
@@ -30,7 +32,7 @@ X6 = {"3.3.3.3", "android", 40}
 X7 = {"3.3.3.3", "android", 10}
 
 X8 = {"4.4.4.4", "iphone", 10}
-
+```
  
 
 A device is considered to have “poor” performance if the average value of its scores is less than or equal to 50. For example, in the above input, "1.1.1.1" has two data points X1 and X2. The average value of the score is 60 (which is > 50). "1.1.1.1" is NOT poor. "2.2.2.2" instead has average value 15 and is poor. Similarly, "3.3.3.3" and "4.4.4.4" are poor.
